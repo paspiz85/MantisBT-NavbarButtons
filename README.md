@@ -22,13 +22,13 @@ Configuration
 Add in config/config_inc.php:
 ```
 $g_plugin_NavbarButtons_buttons =array(
-	array(
-    	'any_project_level_threshold' => DEVELOPER,
-    	'url'       => 'https://github.com/mantisbt',
-    	'title'     => 'GitHub',
-    	'icon'      => 'fa-code-fork',
-   		'label'     => 'GitHub'
-	)
+    array(
+        'any_project_level_threshold' => DEVELOPER,
+        'url'       => 'https://github.com/mantisbt',
+        'title'     => 'GitHub',
+        'icon'      => 'fa-code-fork',
+        'label'     => 'GitHub'
+    )
 );
 ```
 
