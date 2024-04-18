@@ -46,26 +46,24 @@ class NavbarButtonsPlugin extends MantisPlugin {
 
     function hooks() {
         return array(
-            'EVENT_LAYOUT_NAVBAR_BUTTONS_END' => 'html_print_buttons',
+            'EVENT_LAYOUT_NAVBAR_BUTTONS_FILTER' => 'navbar_buttons_filter',
         );
     }
 
-    function html_print_buttons() {
+    function navbar_buttons_filter( $p_event, $p_buttons ) {
         $t_buttons = plugin_config_get('buttons');
         foreach( $t_buttons as $t_button ) {
             if ( array_key_exists('any_project_level_threshold', $t_button) && !access_has_any_project_level( $t_button['any_project_level_threshold'] ) ) {
                 continue;
             }
-            $t_title = $t_button['title'];
-            $t_label = $t_button['label'];
-            $t_html_title = empty( $t_title ) ? '' : ' title="' . string_html_specialchars( $t_title ) . '"';
-            echo '<a class="btn btn-primary btn-sm" href="' . $t_button['url'] . '"' . $t_html_title . '>';
-            print_icon( $t_button['icon'] );
-            if ( !empty( $t_label ) ) {
-                echo ' ' . string_html_specialchars( $t_label );
-            }
-            echo '</a>';
+            $p_buttons[] = [
+                'url' => $t_button['url'],
+                'icon' => $t_button['icon'],
+                'title' => $t_button['title'],
+                'label' => $t_button['label']
+            ];
         }
+        return array( $p_buttons );
     }
 
 }
